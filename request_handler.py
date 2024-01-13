@@ -6,3 +6,5 @@ class HandleRequests(BaseHTTPRequestHandler):
     def do_GET(self):
 
         self._set_headers(200)
+
+        print(self.path)
