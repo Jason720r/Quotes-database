@@ -8,3 +8,5 @@ class HandleRequests(BaseHTTPRequestHandler):
         self._set_headers(200)
 
         print(self.path)
+
+        if self.path == "/quotes":
