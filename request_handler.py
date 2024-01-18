@@ -10,3 +10,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         print(self.path)
 
         if self.path == "/quotes":
+
+            response = [
+                {}
+            ]
