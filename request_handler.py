@@ -12,5 +12,5 @@ class HandleRequests(BaseHTTPRequestHandler):
         if self.path == "/quotes":
 
             response = [
-                {}
+                {"id": 1, "quote": "Hello",}
             ]
