@@ -9,8 +9,14 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         print(self.path)
 
-        if self.path == "/quotes":
+        if self.path == "/workouts":
 
             response = [
-                {"id": 1, "quote": "Hello",}
+                {"id": 1, "quote": "Hello", "author": "Me"}, 
+                {"id": 1, "quote": "Hello", "author": "Me"}
             ]
+        else:
+            response = []
+
+        self.wfile.write(json.dumps(response).encode())
+    def do_POST(self):
