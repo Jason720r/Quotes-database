@@ -27,3 +27,13 @@ class HandleRequests(BaseHTTPRequestHandler):
         post_body = self.rfile.read(content_len)
         response = { "payload": post_body}
         self.wfile.write(json.dumps(response).encode())
+
+    def do_PUT(self):
+
+        self.do_PUT()
+    def _set_headers(self, status):
+
+        self.send_response(status)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.end_headers()
