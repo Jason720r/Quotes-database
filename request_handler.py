@@ -1,5 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from views import get_all_products
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -11,10 +12,7 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if self.path == "/products":
 
-            response = [
-                {"id": 1, "quote": "Hello", "author": "Me"}, 
-                {"id": 1, "quote": "Hello", "author": "Me"}
-            ]
+            response = get_all_products()
         else:
             response = []
 
