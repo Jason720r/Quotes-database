@@ -1,20 +1,34 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_products
+from views import get_all_products, get_single_product
 
 class HandleRequests(BaseHTTPRequestHandler):
+    def parse_url(self, path):
+
+        path_params = path.split("/")
+        resource = path_params[1]
+        id = None
+
+        try:
+            id = int(path_params[2])
+        except IndexError:
+            pass
+        except ValueError:
+            pass
+        return (resource, id)
 
     def do_GET(self):
 
         self._set_headers(200)
+        response = {}
 
-        print(self.path)
+        (resource, id) = self.parse_url(self.path)
 
-        if self.path == "/products":
-
-            response = get_all_products()
-        else:
-            response = []
+        if resource == "animals":
+            if id is not None:
+                response = get_single_product(id)
+            else:
+                response = get_all_products()
 
         self.wfile.write(json.dumps(response).encode())
     def do_POST(self):

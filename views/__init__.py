@@ -1,1 +1,1 @@
-from .product_requests import get_all_products
+from .product_requests import get_all_products, get_single_product
