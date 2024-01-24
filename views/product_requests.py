@@ -32,3 +32,15 @@ def get_single_product(id):
             requested_product = product
     
     return requested_product
+
+def create_product(product):
+
+    max_id = PRODUCTS[-1]["id"]
+
+    new_id = max_id + 1
+
+    product["id"] = new_id
+
+    PRODUCTS.append(product)
+
+    return product
