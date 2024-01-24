@@ -1,2 +1,2 @@
 from .product_requests import get_all_products, get_single_product
-from .category_requests import get_all_categories
+from .category_requests import get_all_categories, get_single_category

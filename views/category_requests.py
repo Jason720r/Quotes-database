@@ -12,7 +12,7 @@ CATEGORIES = [
 def get_all_categories():
     return CATEGORIES
 
-def get_single_category():
+def get_single_category(id):
 
     requested_category = None
 
@@ -20,4 +20,5 @@ def get_single_category():
 
         if category["id"] == id:
             requested_category = category
+
     return requested_category

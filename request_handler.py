@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_products, get_single_product
+from views import get_all_products, get_single_product, get_all_categories, get_single_category
 
 class HandleRequests(BaseHTTPRequestHandler):
     def parse_url(self, path):
@@ -29,6 +29,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 response = get_single_product(id)
             else:
                 response = get_all_products()
+        
+        if resource == "categories":
+            if id is not None:
+                response = get_single_category(id)
+            else:
+                response = get_all_categories()
 
         self.wfile.write(json.dumps(response).encode())
     def do_POST(self):
