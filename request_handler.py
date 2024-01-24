@@ -24,7 +24,7 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         (resource, id) = self.parse_url(self.path)
 
-        if resource == "animals":
+        if resource == "products":
             if id is not None:
                 response = get_single_product(id)
             else:
