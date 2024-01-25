@@ -34,3 +34,15 @@ def create_category(category):
     CATEGORIES.append(category)
 
     return category
+
+def delete_category(id):
+
+    category_index = -1
+
+    for index, category in enumerate(CATEGORIES):
+        if category["id"] == id:
+
+            category_index = index
+        
+    if category_index >= 0:
+        CATEGORIES.pop(category_index)
