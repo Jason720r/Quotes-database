@@ -3,6 +3,10 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from views import get_all_products, get_single_product, create_product, delete_product, update_product, get_all_categories, get_single_category, create_category, delete_category
 
 class HandleRequests(BaseHTTPRequestHandler):
+    def _set_headers(self, status_code):
+        self.send_response(status_code)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
     def parse_url(self, path):
 
         path_params = path.split("/")
@@ -75,6 +79,7 @@ class HandleRequests(BaseHTTPRequestHandler):
 
     def do_PUT(self):
         
+        
         self._set_headers(204)
         content_len = int(self.headers.get('content-length', 0))
         post_body = self.rfile.read(content_len)
@@ -84,7 +89,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         (resource, id) = self.parse_url(self.path)
 
         # Delete a single animal from the list
-        if resource == "animals":
+        if resource == "products":
             update_product(id, post_body)
 
      # Encode the new animal and send in response
