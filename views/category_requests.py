@@ -22,3 +22,15 @@ def get_single_category(id):
             requested_category = category
 
     return requested_category
+
+def create_category(category):
+
+    max_id = CATEGORIES[-1]["id"]
+
+    new_id = max_id + 1
+
+    category["id"] = new_id
+
+    CATEGORIES.append(category)
+
+    return category
