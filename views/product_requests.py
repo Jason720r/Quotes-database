@@ -44,3 +44,15 @@ def create_product(product):
     PRODUCTS.append(product)
 
     return product
+
+def delete_product(id):
+
+    product_index = -1
+
+    for index, product in enumerate(PRODUCTS):
+        if product["id"] == id:
+
+            product_index = index
+    
+    if product_index >= 0:
+        PRODUCTS.pop(product_index)
