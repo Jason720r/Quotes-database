@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_products, get_single_product, create_product, get_all_categories, get_single_category
+from views import get_all_products, get_single_product, create_product, get_all_categories, get_single_category, create_category
 
 class HandleRequests(BaseHTTPRequestHandler):
     def parse_url(self, path):
@@ -52,8 +52,12 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "products":
             new_product = create_product(post_body)
-        
+        if resource == "categories":
+            new_category = create_category(post_body)
+
         self.wfile.write(json.dumps(new_product).encode())
+        self.wfile.write(json.dumps(new_category).encode())
+
 
 
     def do_PUT(self):
