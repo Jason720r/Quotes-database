@@ -46,3 +46,11 @@ def delete_category(id):
         
     if category_index >= 0:
         CATEGORIES.pop(category_index)
+
+def update_category(id, new_category):
+
+    for index, category in enumerate(CATEGORIES):
+        if category["id"] == id:
+
+            CATEGORIES[index] = new_category
+            break

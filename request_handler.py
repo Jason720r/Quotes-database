@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_products, get_single_product, create_product, delete_product, update_product, get_all_categories, get_single_category, create_category, delete_category
+from views import get_all_products, get_single_product, create_product, delete_product, update_product, get_all_categories, get_single_category, create_category, delete_category, update_category
 
 class HandleRequests(BaseHTTPRequestHandler):
     def _set_headers(self, status_code):
@@ -91,6 +91,8 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Delete a single animal from the list
         if resource == "products":
             update_product(id, post_body)
+        if resource == "categories":
+            update_category(id, post_body)
 
      # Encode the new animal and send in response
         self.wfile.write("".encode())
