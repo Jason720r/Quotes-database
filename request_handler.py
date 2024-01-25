@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_products, get_single_product, create_product, delete_product, get_all_categories, get_single_category, create_category, delete_category
+from views import get_all_products, get_single_product, create_product, delete_product, update_product, get_all_categories, get_single_category, create_category, delete_category
 
 class HandleRequests(BaseHTTPRequestHandler):
     def parse_url(self, path):
@@ -74,14 +74,21 @@ class HandleRequests(BaseHTTPRequestHandler):
 
 
     def do_PUT(self):
+        
+        self._set_headers(204)
+        content_len = int(self.headers.get('content-length', 0))
+        post_body = self.rfile.read(content_len)
+        post_body = json.loads(post_body)
 
-        self.do_PUT()
-    def _set_headers(self, status):
+        # Parse the URL
+        (resource, id) = self.parse_url(self.path)
 
-        self.send_response(status)
-        self.send_header('Content-type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.end_headers()
+        # Delete a single animal from the list
+        if resource == "animals":
+            update_product(id, post_body)
+
+     # Encode the new animal and send in response
+        self.wfile.write("".encode())
     
     def do_OPTIONS(self):
 
