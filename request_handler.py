@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_products, get_single_product, create_product, get_all_categories, get_single_category, create_category
+from views import get_all_products, get_single_product, create_product, delete_product, get_all_categories, get_single_category, create_category
 
 class HandleRequests(BaseHTTPRequestHandler):
     def parse_url(self, path):
@@ -57,6 +57,17 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         self.wfile.write(json.dumps(new_product).encode())
         self.wfile.write(json.dumps(new_category).encode())
+    
+    def do_DELETE(self):
+
+        self._set_headers(204)
+
+        (resource, id) = self.parse_url(self.path)
+
+        if resource == "products":
+            delete_product(id)
+
+        self.wfile.write("".encode())
 
 
 
