@@ -1,3 +1,6 @@
+from .category_requests import get_single_category
+
+
 PRODUCTS = [
     {
         "id": 1,
@@ -30,6 +33,10 @@ def get_single_product(id):
 
         if product["id"] == id:
             requested_product = product
+            break
+    if requested_product is not None:
+        matching_category = get_single_category(requested_product["typeId"])
+        requested_product["type"] = matching_category
     
     return requested_product
 
