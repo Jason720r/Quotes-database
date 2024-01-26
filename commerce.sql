@@ -9,7 +9,10 @@ CREATE TABLE `User` (
     `email`    TEXT NOT NULL,
     `password`    TEXT NOT NULL,
     `first_name`    TEXT NOT NULL,
-    `last_name`    TEXT NOT NULL
+    `last_name`    TEXT NOT NULL,
+    `is_admin` TEXT NOT NULL,
+    `orderId` INTEGER NOT NULL,
+    FOREIGN KEY(`orderId`) REFERENCES `Order`(`id`)
     
 );
 

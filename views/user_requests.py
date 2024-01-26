@@ -5,7 +5,7 @@ USERS = [
         "id": 1,
         "email": "jasonli99193@gmail.com",
         "password": "403234",
-        "first_name": "Jason"
+        "first_name": "Jason",
         "last_name": "Li",
         "is_admin": True,
         "orderId": 0
