@@ -1,4 +1,4 @@
-class Customer():
+class User():
 
     def __init__(self, id, email, password, first_name, last_name, is_admin, orderId):
         self.id = id
