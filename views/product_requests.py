@@ -59,19 +59,28 @@ def get_all_products():
         return products
 
 def get_single_product(id):
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
 
-    requested_product = None
+        db_cursor.execute(""" 
+        SELECT
+            p.id,
+            p.title,
+            p.price,
+            p.deliveryTime,
+            p.inStock,
+            p.typeId
+        FROM product p
+        WHERE p.id = ?
+        """, ( id, ))
 
-    for product in PRODUCTS:
+        data = db_cursor.fetchone()
 
-        if product["id"] == id:
-            requested_product = product
-            break
-    if requested_product is not None:
-        matching_category = get_single_category(requested_product["typeId"])
-        requested_product["type"] = matching_category
-    
-    return requested_product
+        product = Product(data['id'], data['title'], data['price'],
+                              data['deliveryTime'], data['inStock'],
+                              data['typeId'])
+        return product.__dict__
 
 def create_product(product):
 
