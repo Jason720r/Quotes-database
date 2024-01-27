@@ -4,13 +4,25 @@ CREATE TABLE `Category` (
 	
 );
 
-CREATE TABLE `User` (
+-- CREATE TABLE `User` (
+--     `id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+--     `email`    TEXT NOT NULL,
+--     `password`    TEXT NOT NULL,
+--     `first_name`    TEXT NOT NULL,
+--     `last_name`    TEXT NOT NULL,
+--     `is_admin` TEXT NOT NULL,
+--     `orderId` INTEGER NOT NULL,
+--     FOREIGN KEY(`orderId`) REFERENCES `Order`(`id`)
+    
+-- );
+
+CREATE TABLE `U` (
     `id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `email`    TEXT NOT NULL,
     `password`    TEXT NOT NULL,
-    `first_name`    TEXT NOT NULL,
-    `last_name`    TEXT NOT NULL,
-    `is_admin` TEXT NOT NULL,
+    `firstName`    TEXT NOT NULL,
+    `lastName`    TEXT NOT NULL,
+    `isAdmin` TEXT NOT NULL,
     `orderId` INTEGER NOT NULL,
     FOREIGN KEY(`orderId`) REFERENCES `Order`(`id`)
     
@@ -44,7 +56,7 @@ CREATE TABLE `Order` (
 INSERT INTO `Category` VALUES (null, "Furniture");
 INSERT INTO `Category` VALUES (null, "Kitchen");
 
-INSERT INTO `User` VALUES (null, "jasonli99193@gmail.com", "403234", "Jason", "Li", True, 0);
+INSERT INTO `U` VALUES (null, "jasonli99193@gmail.com", "403234", "Jason", "Li", True, 0);
 
 INSERT INTO `Product` VALUES (null, "rug", "https://atlas-content-cdn.pixelsquid.com/stock-images/rug-ENAeoGE-600.jpg", 25.99, "2 weeks", 3, 1);
 INSERT INTO `Product` VALUES (null, "couch", "https://atlas-content-cdn.pixelsquid.com/stock-images/rug-ENAeoGE-600.jpg", 30.99, "2 weeks", 2, 1);

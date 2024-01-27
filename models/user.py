@@ -1,10 +1,10 @@
 class User():
 
-    def __init__(self, id, email, password, first_name, last_name, is_admin, orderId):
+    def __init__(self, id, email, password, firstName, lastName, isAdmin, orderId):
         self.id = id
         self.email = email
         self.password = password
-        self.first_name = first_name
-        self.last_name = last_name
-        self.is_admin = is_admin
+        self.firstName = firstName
+        self.lastName = lastName
+        self.isAdmin = isAdmin
         self.orderId = orderId

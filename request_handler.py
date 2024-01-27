@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_products, get_single_product, create_product, delete_product, update_product, get_all_categories, get_single_category, create_category, delete_category, update_category
+from views import get_all_products, get_single_product, create_product, delete_product, update_product, get_all_categories, get_single_category, create_category, delete_category, update_category, get_all_users
 
 class HandleRequests(BaseHTTPRequestHandler):
     def _set_headers(self, status_code):
@@ -39,6 +39,8 @@ class HandleRequests(BaseHTTPRequestHandler):
                 response = get_single_category(id)
             else:
                 response = get_all_categories()
+        if resource == "users":
+            response = get_all_users()
 
         self.wfile.write(json.dumps(response).encode())
     def do_POST(self):
