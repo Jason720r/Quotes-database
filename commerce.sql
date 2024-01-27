@@ -16,23 +16,24 @@ CREATE TABLE `User` (
     
 );
 
-CREATE TABLE `Animal` (
+CREATE TABLE `Product` (
 	`id`  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`name`  TEXT NOT NULL,
-	`status` TEXT NOT NULL,
-	`breed` TEXT NOT NULL,
-	`customer_id` INTEGER NOT NULL,
-	`location_id` INTEGER,
-	FOREIGN KEY(`customer_id`) REFERENCES `Customer`(`id`),
-	FOREIGN KEY(`location_id`) REFERENCES `Location`(`id`)
+	`title`  TEXT NOT NULL,
+	`price` INTEGER NOT NULL,
+	`deliveryTime` TEXT NOT NULL,
+	`inStock` INTEGER NOT NULL,
+	`typeId` INTEGER,
+	FOREIGN KEY(`typeId`) REFERENCES `Type`(`id`),
+	
 );
 
 
-CREATE TABLE `Employee` (
+CREATE TABLE `Order` (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`name`	TEXT NOT NULL,
-	`address`	TEXT NOT NULL,
-	`location_id` INTEGER NOT NULL,
-	FOREIGN KEY(`location_id`) REFERENCES `Location`(`id`)
+	`date`	TEXT NOT NULL,
+	`productId`	TEXT NOT NULL,
+	`userId` INTEGER NOT NULL,
+	FOREIGN KEY(`productId`) REFERENCES `Product`(`id`)
+    FOREIGN KEY(`userId`) REFERENCES `User`(`id`)
 
 );
