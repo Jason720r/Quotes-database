@@ -31,7 +31,7 @@ CREATE TABLE `Product` (
 CREATE TABLE `Order` (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`date`	TEXT NOT NULL,
-	`productId`	TEXT NOT NULL,
+	`productId`	INTEGER NOT NULL,
 	`userId` INTEGER NOT NULL,
 	FOREIGN KEY(`productId`) REFERENCES `Product`(`id`),
     FOREIGN KEY(`userId`) REFERENCES `User`(`id`)

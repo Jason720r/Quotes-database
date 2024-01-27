@@ -1,4 +1,7 @@
 from .category_requests import get_single_category
+import sqlite3
+import json
+from models import Product
 
 
 PRODUCTS = [
@@ -23,7 +26,37 @@ PRODUCTS = [
 ]
 
 def get_all_products():
-    return PRODUCTS
+    
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT
+            p.id,
+            p.title,
+            p.price,
+            p.deliveryTime,
+            p.inStock,
+            p.typeId
+        FROM product p
+        """)
+        #empty list
+        products = []
+
+        #convert rows of data into a Python list
+        dataset = db_cursor.fetchall()
+
+        for row in dataset:
+            # Create an product instance from the current row.
+            # Note that the database fields are specified in
+            # exact order of the parameters defined in the
+            # Product class above.
+            product = Product(row['id'], row['title'], row['price'],
+                              row['deliveryTime'], ['inStock'],
+                              row['typeId'])
+            products.append(product.__dict__)
+        return products
 
 def get_single_product(id):
 
