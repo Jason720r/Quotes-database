@@ -23,7 +23,7 @@ CREATE TABLE `Product` (
 	`deliveryTime` TEXT NOT NULL,
 	`inStock` INTEGER NOT NULL,
 	`typeId` INTEGER,
-	FOREIGN KEY(`typeId`) REFERENCES `Type`(`id`),
+	FOREIGN KEY(`typeId`) REFERENCES `Category`(`id`),
 	
 );
 
@@ -33,7 +33,12 @@ CREATE TABLE `Order` (
 	`date`	TEXT NOT NULL,
 	`productId`	TEXT NOT NULL,
 	`userId` INTEGER NOT NULL,
-	FOREIGN KEY(`productId`) REFERENCES `Product`(`id`)
+	FOREIGN KEY(`productId`) REFERENCES `Product`(`id`),
     FOREIGN KEY(`userId`) REFERENCES `User`(`id`)
 
 );
+
+INSERT INTO `Category` VALUES (null, "Furniture");
+INSERT INTO `Category` VALUES (null, "Kitchen");
+
+INSERT INTO `User` VALUES (null, "Kitchen");
