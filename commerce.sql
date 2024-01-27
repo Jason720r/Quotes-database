@@ -41,4 +41,9 @@ CREATE TABLE `Order` (
 INSERT INTO `Category` VALUES (null, "Furniture");
 INSERT INTO `Category` VALUES (null, "Kitchen");
 
-INSERT INTO `User` VALUES (null, "Kitchen");
+INSERT INTO `User` VALUES (null, "jasonli99193@gmail.com", "403234", "Jason", "Li", True, 0);
+
+INSERT INTO `Product` VALUES (null, "rug", 25.99, "2 weeks" 3, 1);
+INSERT INTO `Product` VALUES (null, "couch", 30.99, "2 weeks" 2, 1);
+
+INSERT INTO `Order` VALUES (null, "01/20/2024", 1, 1);
