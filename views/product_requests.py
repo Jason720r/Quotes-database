@@ -35,6 +35,7 @@ def get_all_products():
         SELECT
             p.id,
             p.title,
+            p.image,
             p.price,
             p.deliveryTime,
             p.inStock,
@@ -52,8 +53,8 @@ def get_all_products():
             # Note that the database fields are specified in
             # exact order of the parameters defined in the
             # Product class above.
-            product = Product(row['id'], row['title'], row['price'],
-                              row['deliveryTime'], row['inStock'],
+            product = Product(row['id'], row['title'], row['image'],
+                              row['price'], row['deliveryTime'], row['inStock'],
                               row['typeId'])
             products.append(product.__dict__)
         return products
@@ -67,6 +68,7 @@ def get_single_product(id):
         SELECT
             p.id,
             p.title,
+            p.image,
             p.price,
             p.deliveryTime,
             p.inStock,
@@ -77,8 +79,8 @@ def get_single_product(id):
 
         data = db_cursor.fetchone()
 
-        product = Product(data['id'], data['title'], data['price'],
-                              data['deliveryTime'], data['inStock'],
+        product = Product(data['id'], data['title'], data['image'],
+                          data['price'], data['deliveryTime'], data['inStock'],
                               data['typeId'])
         return product.__dict__
 

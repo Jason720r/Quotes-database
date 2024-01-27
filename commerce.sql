@@ -19,6 +19,7 @@ CREATE TABLE `User` (
 CREATE TABLE `Product` (
 	`id`  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`title`  TEXT NOT NULL,
+    `image` TEXT NOT NULL,
 	`price` INTEGER NOT NULL,
 	`deliveryTime` TEXT NOT NULL,
 	`inStock` INTEGER NOT NULL,
@@ -26,6 +27,8 @@ CREATE TABLE `Product` (
 	FOREIGN KEY(`typeId`) REFERENCES `Category`(`id`)
 	
 );
+ALTER TABLE `Product`
+ADD COLUMN `image` TEXT NOT NULL DEFAULT 'default_image_url';
 
 
 CREATE TABLE `Order` (
@@ -43,7 +46,7 @@ INSERT INTO `Category` VALUES (null, "Kitchen");
 
 INSERT INTO `User` VALUES (null, "jasonli99193@gmail.com", "403234", "Jason", "Li", True, 0);
 
-INSERT INTO `Product` VALUES (null, "rug", 25.99, "2 weeks", 3, 1);
-INSERT INTO `Product` VALUES (null, "couch", 30.99, "2 weeks", 2, 1);
+INSERT INTO `Product` VALUES (null, "rug", "https://atlas-content-cdn.pixelsquid.com/stock-images/rug-ENAeoGE-600.jpg", 25.99, "2 weeks", 3, 1);
+INSERT INTO `Product` VALUES (null, "couch", "https://atlas-content-cdn.pixelsquid.com/stock-images/rug-ENAeoGE-600.jpg", 30.99, "2 weeks", 2, 1);
 
 INSERT INTO `Order` VALUES (null, "01/20/2024", 1, 1);
