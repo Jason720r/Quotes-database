@@ -53,7 +53,7 @@ def get_all_products():
             # exact order of the parameters defined in the
             # Product class above.
             product = Product(row['id'], row['title'], row['price'],
-                              row['deliveryTime'], ['inStock'],
+                              row['deliveryTime'], row['inStock'],
                               row['typeId'])
             products.append(product.__dict__)
         return products
