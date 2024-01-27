@@ -37,15 +37,24 @@ def get_all_categories():
         return categories
 
 def get_single_category(id):
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
 
-    requested_category = None
+        db_cursor.execute(""" 
+        SELECT
+            c.id,
+            c.type
+        FROM category c
+        WHERE c.id = ?
+        """, ( id, ))
 
-    for category in CATEGORIES:
+        data = db_cursor.fetchone()
 
-        if category["id"] == id:
-            requested_category = category
+        category = Category(data['id'], data['type'])
 
-    return requested_category
+        return category.__dict__
+
 
 def create_category(category):
 
