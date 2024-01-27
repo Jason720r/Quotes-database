@@ -1,3 +1,7 @@
+import sqlite3
+import json
+from models import Category
+
 CATEGORIES = [
     {
         "id": 1,
@@ -10,7 +14,27 @@ CATEGORIES = [
 ]
 
 def get_all_categories():
-    return CATEGORIES
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT
+            c.id,
+            c.type
+        FROM category c
+        """)
+
+        categories = []
+
+        dataset = db_cursor.fetchall()
+
+        for row in dataset:
+
+            category = Category(row['id'], row['type'])
+
+            categories.append(category.__dict__)
+        return categories
 
 def get_single_category(id):
 
