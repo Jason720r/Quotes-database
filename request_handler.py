@@ -30,6 +30,13 @@ class HandleRequests(BaseHTTPRequestHandler):
         self._set_headers(200)
         response = {}
 
+        # Parse URL and store entire tuple in a variable
+        parsed = self.parse_url(self.path)
+
+        # If the path does not include a query parameter, continue with the original if block
+        if '?' not in self.path:
+            ( resource, id ) = parsed
+
         (resource, id) = self.parse_url(self.path)
 
         if resource == "products":
@@ -45,6 +52,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 response = get_all_categories()
         if resource == "users":
             response = get_all_users()
+        else: # There is a ? in the path, run the query param functions
+            (resource, query) = parsed
+
+        # see if the query dictionary has an email key
+        # if query.get('email') and resource == 'users':
+        #     response = get_user_by_email(query['email'][0])
 
         self.wfile.write(json.dumps(response).encode())
     def do_POST(self):
