@@ -34,11 +34,26 @@ def get_all_users():
         return users
 
 def get_single_user(id):
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
 
-    requested_user = None
+        db_cursor.execute(""" 
+        SELECT
+        u.id,
+        u.firstName,
+        u.lastName,
+        u.isAdmin,
+        u.orderId,
+        u.email,
+        u.password
+    FROM U_new u
+    WHERE p.id = ?
+    """, ( id, ))
 
-    for user in USERS:
+    data = db_cursor.fetchone()
 
-        if user["id"] == id:
-            requested_user = user
-            break
+    user = User(data['id'], data['email'], data['password'],
+                        data['firstName'], data['lastName'], data['isAdmin'],
+                        data['orderId'])
+    return user.__dict__
