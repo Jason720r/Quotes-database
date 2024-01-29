@@ -2,17 +2,7 @@ from .order_requests import get_single_order
 import sqlite3
 import json
 from models import User
-USERS = [
-    {
-        "id": 1,
-        "email": "jasonli99193@gmail.com",
-        "password": "403234",
-        "first_name": "Jason",
-        "last_name": "Li",
-        "is_admin": True,
-        "orderId": 0
-    }
-]
+
 
 def get_all_users():
     with sqlite3.connect("./commerce.sqlite3") as conn:
@@ -22,13 +12,13 @@ def get_all_users():
         db_cursor.execute("""
         SELECT
             u.id,
-            u.email,
-            u.password,
             u.firstName,
             u.lastName,
             u.isAdmin,
-            u.orderId
-        FROM U u  
+            u.orderId,
+            u.email,
+            u.password
+        FROM U_new u  
         """)
 
         users = []

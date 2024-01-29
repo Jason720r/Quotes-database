@@ -28,6 +28,19 @@ CREATE TABLE `U` (
     
 );
 
+CREATE TABLE `U_new` (
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `firstName` TEXT NOT NULL,
+    `lastName` TEXT NOT NULL,
+    `isAdmin` TEXT NOT NULL,
+    `orderId` INTEGER NOT NULL,
+    `email` TEXT NOT NULL,
+    `password` TEXT NOT NULL,
+    FOREIGN KEY(`orderId`) REFERENCES `Order`(`id`)
+);
+
+
+
 CREATE TABLE `Product` (
 	`id`  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`title`  TEXT NOT NULL,
@@ -56,7 +69,7 @@ CREATE TABLE `Order` (
 INSERT INTO `Category` VALUES (null, "Furniture");
 INSERT INTO `Category` VALUES (null, "Kitchen");
 
-INSERT INTO `U` VALUES (null, "jasonli99193@gmail.com", "403234", "Jason", "Li", True, 0);
+INSERT INTO `U_new` VALUES (null, "Jason", "Li", True, 0, "jasonli99193@gmail.com", "403234");
 
 INSERT INTO `Product` VALUES (null, "rug", "https://atlas-content-cdn.pixelsquid.com/stock-images/rug-ENAeoGE-600.jpg", 25.99, "2 weeks", 3, 1);
 INSERT INTO `Product` VALUES (null, "couch", "https://atlas-content-cdn.pixelsquid.com/stock-images/rug-ENAeoGE-600.jpg", 30.99, "2 weeks", 2, 1);
