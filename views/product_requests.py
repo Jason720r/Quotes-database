@@ -113,12 +113,32 @@ def delete_product(id):
 
 
 def update_product(id, new_product):
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        db_cursor = conn.cursor()
 
-    for index, product in enumerate(PRODUCTS):
-        if product["id"] == id:
-
-            PRODUCTS[index] = new_product
-            break
+        db_cursor.execute("""
+        UPDATE product
+            SET
+                title = ?,
+                image = ?,
+                price = ?,
+                deliveryTime = ?,
+                inStock = ?,
+                stockQuantity = ?
+                typeId = ?
+        WHERE id = ?      
+        """, (new_product['title'], new_product['image'],
+              new_product['price'], new_product['deliveryTime'],
+              new_product['inStock'], new_product['stockQuantity'],
+              new_product['typeId'], id,))
+        
+        rows_affected = db_cursor.rowcount
+    if rows_affected == 0:
+        #404 response by main module
+        return False
+    else:
+        #204 response by main module
+        return True
 def get_products_by_name(name):
      
     with sqlite3.connect("./commerce.sqlite3") as conn:

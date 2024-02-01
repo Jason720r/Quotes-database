@@ -98,8 +98,6 @@ class HandleRequests(BaseHTTPRequestHandler):
 
     def do_PUT(self):
         
-        
-        self._set_headers(204)
         content_len = int(self.headers.get('content-length', 0))
         post_body = self.rfile.read(content_len)
         post_body = json.loads(post_body)
@@ -107,11 +105,17 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Parse the URL
         (resource, id) = self.parse_url(self.path)
 
+        success = False
+
         # Delete a single animal from the list
         if resource == "products":
             update_product(id, post_body)
         if resource == "categories":
             update_category(id, post_body)
+        if success:
+            self._set_headers(204)
+        else:
+            self._set_headers(404)
 
      # Encode the new animal and send in response
         self.wfile.write("".encode())
