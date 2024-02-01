@@ -123,7 +123,8 @@ def update_product(id, new_product):
             PRODUCTS[index] = new_product
             break
 def get_products_by_name(name):
-     with sqlite3.connect("./commerce.sqlite3") as conn:
+     
+    with sqlite3.connect("./commerce.sqlite3") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
@@ -141,8 +142,13 @@ def get_products_by_name(name):
     WHERE p.name = ?
     """, ( name, ))
     
-    users = []
+    products = []
     dataset = db_cursor.fetchall()
 
     for row in dataset:
-        product = Product
+        product = Product(row['id'], row['title'], row['image'],
+                              row['price'], row['deliveryTime'],
+                              row['inStock'], row['stockQuantity'], row['typeId'])
+        products.append(product.__dict__)
+    
+    return products
