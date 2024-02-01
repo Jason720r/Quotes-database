@@ -70,15 +70,13 @@ def create_category(category):
 
 def delete_category(id):
 
-    category_index = -1
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        db_cursor = conn.cursor()
 
-    for index, category in enumerate(CATEGORIES):
-        if category["id"] == id:
-
-            category_index = index
-        
-    if category_index >= 0:
-        CATEGORIES.pop(category_index)
+        db_cursor.execute(""" 
+        DELETE FROM category
+        WHERE id = ?
+        """, (id, ))
 
 def update_category(id, new_category):
 
