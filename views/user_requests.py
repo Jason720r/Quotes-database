@@ -57,3 +57,33 @@ def get_single_user(id):
                         data['firstName'], data['lastName'], data['isAdmin'],
                         data['orderId'])
     return user.__dict__
+
+def get_users_by_email(email):
+
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute(""" 
+        SELECT
+        u.id,
+        u.firstName,
+        u.lastName,
+        u.isAdmin,
+        u.orderId,
+        u.email,
+        u.password
+    FROM U_new u
+    WHERE u.email = ?
+    """, ( email, ))
+    
+    users = []
+    dataset = db_cursor.fetchall()
+
+    for row in dataset:
+        user = User(row['id'], row['email'], row['password'],
+                        row['firstName'], row['lastName'], row['isAdmin'],
+                        row['orderId'])
+        users.append(user.__dict__)
+
+    return users
