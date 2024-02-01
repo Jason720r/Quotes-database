@@ -122,3 +122,27 @@ def update_product(id, new_product):
 
             PRODUCTS[index] = new_product
             break
+def get_products_by_name(name):
+     with sqlite3.connect("./commerce.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute(""" 
+        SELECT
+        p.id,
+        p.title,
+        p.image,
+        p.price,
+        p.deliveryTime,
+        p.inStock,
+        p.stockQuantity,
+        p.typeId
+    FROM product p
+    WHERE p.name = ?
+    """, ( name, ))
+    
+    users = []
+    dataset = db_cursor.fetchall()
+
+    for row in dataset:
+        product = Product
