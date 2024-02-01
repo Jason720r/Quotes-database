@@ -1,6 +1,6 @@
 class Product():
 
-    def __init__(self, id, typeId, title, image, price, deliveryTime, inStock):
+    def __init__(self, id, typeId, title, image, price, deliveryTime, inStock, stockQuantity):
         self.id = id
         self.typeId = typeId
         self.title = title
@@ -8,3 +8,4 @@ class Product():
         self.price = price
         self.deliveryTime = deliveryTime
         self.inStock = inStock
+        self.stockQuantity = stockQuantity

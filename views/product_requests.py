@@ -25,8 +25,9 @@ PRODUCTS = [
     }
 ]
 
+
 def get_all_products():
-    
+
     with sqlite3.connect("./commerce.sqlite3") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
@@ -39,13 +40,14 @@ def get_all_products():
             p.price,
             p.deliveryTime,
             p.inStock,
+            p.stockQuantity,
             p.typeId
         FROM product p
         """)
-        #empty list
+        # empty list
         products = []
 
-        #convert rows of data into a Python list
+        # convert rows of data into a Python list
         dataset = db_cursor.fetchall()
 
         for row in dataset:
@@ -54,10 +56,11 @@ def get_all_products():
             # exact order of the parameters defined in the
             # Product class above.
             product = Product(row['id'], row['title'], row['image'],
-                              row['price'], row['deliveryTime'], row['inStock'],
-                              row['typeId'])
+                              row['price'], row['deliveryTime'],
+                              row['inStock'], row['stockQuantity'], row['typeId'])
             products.append(product.__dict__)
         return products
+
 
 def get_single_product(id):
     with sqlite3.connect("./commerce.sqlite3") as conn:
@@ -72,17 +75,19 @@ def get_single_product(id):
             p.price,
             p.deliveryTime,
             p.inStock,
+            p.stockQuantity,
             p.typeId
         FROM product p
         WHERE p.id = ?
-        """, ( id, ))
+        """, (id, ))
 
         data = db_cursor.fetchone()
 
         product = Product(data['id'], data['title'], data['image'],
                           data['price'], data['deliveryTime'], data['inStock'],
-                              data['typeId'])
+                          data['stockQuantity'], data['typeId'])
         return product.__dict__
+
 
 def create_product(product):
 
@@ -96,6 +101,7 @@ def create_product(product):
 
     return product
 
+
 def delete_product(id):
 
     product_index = -1
@@ -104,9 +110,10 @@ def delete_product(id):
         if product["id"] == id:
 
             product_index = index
-    
+
     if product_index >= 0:
         PRODUCTS.pop(product_index)
+
 
 def update_product(id, new_product):
 
