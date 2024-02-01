@@ -103,16 +103,13 @@ def create_product(product):
 
 
 def delete_product(id):
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        db_cursor = conn.cursor()
 
-    product_index = -1
-
-    for index, product in enumerate(PRODUCTS):
-        if product["id"] == id:
-
-            product_index = index
-
-    if product_index >= 0:
-        PRODUCTS.pop(product_index)
+        db_cursor.execute("""
+        DELETE FROM product
+        WHERE id = ?
+         """, (id, ))
 
 
 def update_product(id, new_product):
