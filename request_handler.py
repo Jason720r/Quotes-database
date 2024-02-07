@@ -7,6 +7,9 @@ class HandleRequests(BaseHTTPRequestHandler):
     def _set_headers(self, status_code):
         self.send_response(status_code)
         self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Authorization')
         self.end_headers()
     def parse_url(self, path):
         """Parse the url into the resource and id"""
