@@ -91,30 +91,15 @@ def get_single_product(id):
 
 def create_product(product):
 
-    product = Product.objects.get(user=request.auth.user)
+    max_id = PRODUCTS[-1]["id"]
 
-    product = Product.objects.create(
-        title=request.data["title"],
-        image=request.data["image"],
-        price=request.data["price"],
-        deliveryTime=request.data["deliveryTime"],
-        inStock=request.data["inStock"],
-        stockQuantity=request.data["stockQuantity"],
-        typeId=request.data["typeId"],
-        product=product,
-    )
-    serializer = ProductSerializer(product)
-    return Response(serializer.data)
+    new_id = max_id + 1
 
-    # max_id = PRODUCTS[-1]["id"]
+    product["id"] = new_id
 
-    # new_id = max_id + 1
+    PRODUCTS.append(product)
 
-    # product["id"] = new_id
-
-    # PRODUCTS.append(product)
-
-    # return product
+    return product
 
 
 def delete_product(id):
