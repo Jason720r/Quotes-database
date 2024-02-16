@@ -91,15 +91,6 @@ def get_single_product(id):
 
 def create_product(product):
 
-    max_id = PRODUCTS[-1]["id"]
-
-    new_id = max_id + 1
-
-    product["id"] = new_id
-
-    PRODUCTS.append(product)
-
-    return product
 
 
 def delete_product(id):
