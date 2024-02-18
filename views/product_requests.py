@@ -90,7 +90,22 @@ def get_single_product(id):
 
 
 def create_product(product):
+    with sqlite3.connect("./commerce.sqlite3") as conn:
+        db_cursor = conn.cursor()
+        db_cursor.execute("""
+        INSERT INTO product (title, image, price, deliveryTime, inStock, stockQuantity, typeId)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (product['title'], product.get('image', ''), product['price'],
+              product['deliveryTime'], product['inStock'], 
+              product.get('stockQuantity', 0), product['typeId']))
 
+        # This line is important to make sure changes are saved to the database
+        conn.commit()
+
+    # After inserting, fetch the last inserted ID to set it to the product
+    product["id"] = db_cursor.lastrowid
+
+    return product
 
 
 def delete_product(id):
